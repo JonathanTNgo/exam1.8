@@ -40,12 +40,17 @@ public class WordCountReducer extends  Reducer<Text, Text, Text, Text> {
                 continue;
            }
        }
-   }
 
-   public void cleanup(Context context) throws IOException, InterruptedException {
-        while (!delays.isEmpty()) {
+       while (!delays.isEmpty()) {
             FlightData curr = delays.poll();
             context.write(new Text(Integer.toString(curr.day_of_week)), new Text(curr.airline + " " + Integer.toString(curr.delay)));
         }
    }
+
+//    public void cleanup(Context context) throws IOException, InterruptedException {
+//         while (!delays.isEmpty()) {
+//             FlightData curr = delays.poll();
+//             context.write(new Text(Integer.toString(curr.day_of_week)), new Text(curr.airline + " " + Integer.toString(curr.delay)));
+//         }
+//    }
 }
